@@ -16,5 +16,5 @@ This project is a journey of learning Python while developing a practical tool. 
 - CSV and PDF export capabilities
 
 ## Progress
-howzit
+
 This is an ongoing project. We're learning as we build.
