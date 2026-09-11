@@ -7,5 +7,3 @@ with open('test.csv', 'r') as csvfile:
     for row in reader:
         print(row)
 
-
-print("Test")
