@@ -11,3 +11,14 @@ minTempInfo = input("What is the minimum temp that the truck may reach: ")
 maxTempInfo = input("What is the max temp that the truck may reach: ")
 startTime = input("What time did the route start(This includes date): ")
 finishTime = input("What time did the route finish(this includes date): ")
+
+print(
+    driverInfo,
+    truckIDInfo,
+    routeInfo,
+    minTempInfo,
+    maxTempInfo,
+    startTime,
+    finishTime,
+    sep="\n"
+)
