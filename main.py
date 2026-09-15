@@ -1,8 +1,13 @@
+# Imports
 
 
+# Greetings or message templates
 greetMessage = "---- welcome to truck tracker v0.1 ----"
 
 print(greetMessage)
+
+
+# Questions
 
 driverInfo = input("What is the drivers name: ")
 truckIDInfo = input("What is the truck ID: ")
@@ -11,6 +16,10 @@ minTempInfo = input("What is the minimum temp that the truck may reach: ")
 maxTempInfo = input("What is the max temp that the truck may reach: ")
 startTime = input("What time did the route start(This includes date): ")
 finishTime = input("What time did the route finish(this includes date): ")
+
+
+
+# Print the results
 
 print(
     driverInfo,
@@ -22,3 +31,4 @@ print(
     finishTime,
     sep="\n"
 )
+
