@@ -32,3 +32,16 @@ print(
     sep="\n"
 )
 
+
+# Writes to file with info
+
+with open("TRI.txt", "w") as file:
+    file.write(f"Driver name: {driverInfo}\n")
+    file.write(f"Truck ID: {truckIDInfo}\n")
+    file.write(f"Route: {routeInfo}\n")
+    file.write(f"Minimum temperature: {minTempInfo}\n")
+    file.write(f"Maximum temperature: {maxTempInfo}\n")
+    file.write(f"Start time: {startTime}\n")
+    file.write(f"Finish time: {finishTime}\n")
+
+print("Information saved to TRI.txt")
