@@ -1,9 +1,5 @@
-import csv
 
 
+greetMessage = "---- welcome to truck tracker v0.1 ----"
 
-with open('test.csv', 'r') as csvfile:
-    reader = csv.reader(csvfile)
-    for row in reader:
-        print(row)
-
+print(greetMessage)
