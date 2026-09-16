@@ -32,6 +32,10 @@ print(
     sep="\n"
 )
 
+# Choose destination
+
+file_path = input("Please enter the file path where you want to save the file: ")
+
 
 # Writes to file with info
 
@@ -45,3 +49,7 @@ with open("TRI.txt", "w") as file:
     file.write(f"Finish time: {finishTime}\n")
 
 print("Information saved to TRI.txt")
+
+
+
+
