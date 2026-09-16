@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Truck tracker v0.1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper:   #E9EFF4;
+    --card:    #FFFFFF;
+    --ink:     #14202B;
+    --ink-soft:#5A6B7C;
+    --line:    #C9D4DF;
+    --chill:   #0E6E8C;
+    --warm:    #B54A32;
+    --focus:   #0E6E8C;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:   #0F1920;
+      --card:    #18252F;
+      --ink:     #E4ECF2;
+      --ink-soft:#93A5B4;
+      --line:    #2B3C49;
+      --chill:   #46B6D4;
+      --warm:    #E07A5F;
+      --focus:   #46B6D4;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:   #0F1920;
+    --card:    #18252F;
+    --ink:     #E4ECF2;
+    --ink-soft:#93A5B4;
+    --line:    #2B3C49;
+    --chill:   #46B6D4;
+    --warm:    #E07A5F;
+    --focus:   #46B6D4;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    padding: 2rem 1.25rem 3rem;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    line-height: 1.5;
+  }
+
+  .wrap { max-width: 62rem; margin: 0 auto; }
+
+  header { margin-bottom: 1.75rem; }
+  h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin: 0 0 0.25rem;
+  }
+  .sub { color: var(--ink-soft); font-size: 0.9375rem; margin: 0; }
+
+  .cols {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 1.25rem;
+    align-items: start;
+  }
+  @media (max-width: 54rem) {
+    .cols { grid-template-columns: minmax(0, 1fr); }
+  }
+
+  .panel {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 1.25rem;
+  }
+
+  .field { margin-bottom: 1rem; }
+  .field:last-child { margin-bottom: 0; }
+
+  label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-bottom: 0.3rem;
+  }
+
+  input {
+    width: 100%;
+    padding: 0.55rem 0.7rem;
+    font: inherit;
+    font-size: 0.9375rem;
+    color: var(--ink);
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+  }
+  input:focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 1px;
+    border-color: var(--focus);
+  }
+
+  .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+
+  .tempbar {
+    height: 5px;
+    border-radius: 3px;
+    margin-top: 0.6rem;
+    background: linear-gradient(90deg, var(--chill), var(--warm));
+  }
+  .temprow {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8125rem;
+    color: var(--ink-soft);
+    margin-top: 0.3rem;
+  }
+
+  .filehead {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 0.6rem;
+  }
+  .filename { font-size: 0.9375rem; font-weight: 600; }
+  .filemeta { font-size: 0.8125rem; color: var(--ink-soft); }
+
+  pre {
+    margin: 0;
+    padding: 0.9rem;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.8125rem;
+    line-height: 1.7;
+    white-space: pre-wrap;
+    word-break: break-word;
+    overflow-x: auto;
+    min-height: 11rem;
+  }
+  .empty { color: var(--ink-soft); }
+
+  .actions { margin-top: 0.9rem; display: flex; gap: 0.6rem; flex-wrap: wrap; }
+
+  button {
+    font: inherit;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    padding: 0.55rem 1rem;
+    border-radius: 4px;
+    border: 1px solid var(--line);
+    background: var(--card);
+    color: var(--ink);
+    cursor: pointer;
+  }
+  button.primary {
+    background: var(--chill);
+    border-color: var(--chill);
+    color: #fff;
+  }
+  button:focus-visible { outline: 2px solid var(--focus); outline-offset: 1px; }
+
+  .status {
+    margin-top: 0.7rem;
+    font-size: 0.8125rem;
+    color: var(--ink-soft);
+    min-height: 1.2em;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>Truck tracker v0.1</h1>
+    <p class="sub">Fill in the route details. The file on the right is exactly what gets saved.</p>
+  </header>
+
+  <div class="cols">
+
+    <!-- Same questions the Python version asks, in the same order -->
+    <div class="panel">
+      <div class="field">
+        <label for="driver">Driver name</label>
+        <input id="driver" type="text" autocomplete="off">
+      </div>
+
+      <div class="field">
+        <label for="truckId">Truck ID</label>
+        <input id="truckId" type="text" autocomplete="off">
+      </div>
+
+      <div class="field">
+        <label for="route">Route taken</label>
+        <input id="route" type="text" placeholder="e.g. Johannesburg to Durban" autocomplete="off">
+      </div>
+
+      <div class="field">
+        <label>Temperature limits (&deg;C)</label>
+        <div class="pair">
+          <input id="minTemp" type="number" step="0.1" placeholder="Minimum" aria-label="Minimum temperature">
+          <input id="maxTemp" type="number" step="0.1" placeholder="Maximum" aria-label="Maximum temperature">
+        </div>
+        <div class="tempbar"></div>
+        <div class="temprow">
+          <span id="minEcho">min &mdash;</span>
+          <span id="maxEcho">max &mdash;</span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="startTime">Route started</label>
+        <input id="startTime" type="datetime-local">
+      </div>
+
+      <div class="field">
+        <label for="finishTime">Route finished</label>
+        <input id="finishTime" type="datetime-local">
+      </div>
+    </div>
+
+    <!-- Live preview of the text file, built the same way the Python f-strings build it -->
+    <div class="panel">
+      <div class="filehead">
+        <span class="filename">TRI.txt</span>
+        <span class="filemeta" id="meta">empty</span>
+      </div>
+      <pre id="preview" class="empty">Start typing to build the file.</pre>
+      <div class="actions">
+        <button class="primary" id="saveBtn">Save TRI.txt</button>
+        <button id="copyBtn">Copy text</button>
+        <button id="clearBtn">Clear form</button>
+      </div>
+      <p class="status" id="status"></p>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  var fields = ["driver","truckId","route","minTemp","maxTemp","startTime","finishTime"];
+  var preview = document.getElementById("preview");
+  var status  = document.getElementById("status");
+  var meta    = document.getElementById("meta");
+
+  function val(id) { return document.getElementById(id).value.trim(); }
+
+  // datetime-local gives "2026-09-16T08:30" — swap the T for a space so it reads normally
+  function readableTime(raw) { return raw ? raw.replace("T", " ") : ""; }
+
+  // This mirrors the Python f-strings exactly, so both versions produce the same file
+  function buildFileText() {
+    return "Driver name: "           + val("driver")               + "\n"
+         + "Truck ID: "              + val("truckId")              + "\n"
+         + "Route: "                 + val("route")                + "\n"
+         + "Minimum temperature: "   + val("minTemp")              + "\n"
+         + "Maximum temperature: "   + val("maxTemp")              + "\n"
+         + "Start time: "            + readableTime(val("startTime"))  + "\n"
+         + "Finish time: "           + readableTime(val("finishTime")) + "\n";
+  }
+
+  function anythingFilled() {
+    return fields.some(function (id) { return val(id) !== ""; });
+  }
+
+  function render() {
+    var text = buildFileText();
+    if (anythingFilled()) {
+      preview.textContent = text;
+      preview.classList.remove("empty");
+      meta.textContent = text.length + " characters";
+    } else {
+      preview.textContent = "Start typing to build the file.";
+      preview.classList.add("empty");
+      meta.textContent = "empty";
+    }
+    document.getElementById("minEcho").textContent = val("minTemp") ? "min " + val("minTemp") + "\u00B0C" : "min \u2014";
+    document.getElementById("maxEcho").textContent = val("maxTemp") ? "max " + val("maxTemp") + "\u00B0C" : "max \u2014";
+    status.textContent = "";
+  }
+
+  fields.forEach(function (id) {
+    document.getElementById(id).addEventListener("input", render);
+  });
+
+  document.getElementById("clearBtn").addEventListener("click", function () {
+    fields.forEach(function (id) { document.getElementById(id).value = ""; });
+    render();
+    document.getElementById("driver").focus();
+  });
+
+  document.getElementById("copyBtn").addEventListener("click", function () {
+    navigator.clipboard.writeText(buildFileText()).then(function () {
+      status.textContent = "Copied to clipboard.";
+    }, function () {
+      status.textContent = "Could not copy \u2014 select the text and copy it manually.";
+    });
+  });
+
+  // Saving works two ways so this page runs both as a hosted page and as a
+  // plain .html file opened from your own computer.
+  document.getElementById("saveBtn").addEventListener("click", async function () {
+    if (!anythingFilled()) {
+      status.textContent = "Fill in at least one field first.";
+      return;
+    }
+    var text = buildFileText();
+
+    var downloads = null;
+    try {
+      if (window.claude && window.claude.use) {
+        downloads = await window.claude.use("downloads");
+      }
+    } catch (e) {
+      downloads = null;
+    }
+
+    if (downloads) {
+      try {
+        await downloads.save({ filename: "TRI.txt", data: text });
+        status.textContent = "Saved TRI.txt";
+      } catch (err) {
+        status.textContent = err && err.code === "declined"
+          ? "Save cancelled."
+          : "Could not save the file.";
+      }
+      return;
+    }
+
+    // Fallback: the standard browser download used when this file is opened locally
+    var blob = new Blob([text], { type: "text/plain" });
+    var url  = URL.createObjectURL(blob);
+    var a    = document.createElement("a");
+    a.href = url;
+    a.download = "TRI.txt";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    status.textContent = "Downloaded TRI.txt";
+  });
+
+  render();
+</script>
+</body>
+</html>
