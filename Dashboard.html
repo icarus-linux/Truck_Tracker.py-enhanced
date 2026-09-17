@@ -1,28 +1,38 @@
+<!-- 
+  Dashboard.html
+  Landing page after login. Shows the top navigation ribbon,
+  used by every other page in this app for consistency.
+-->
 <!DOCTYPE html>
 <html>
 <head>
 <title>Al's logistical Dashboard</title>
+
 <style>
-body {
-  margin: 0;
-}
+  body {
+    margin: 0; /* removes default browser spacing */
+  }
 
-.ribbon {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  background-color: #ddd;
-  border-bottom: 1px solid black;
-  padding: 10px 0;
-}
+  /* The horizontal navigation bar across the top of the page */
+  .ribbon {
+    display: flex;            /* lays out the child divs side-by-side instead of stacked */
+    justify-content: center;  /* centers the nav items horizontally within the ribbon */
+    gap: 20px;                 /* space between each nav item */
+    background-color: #ddd;    /* light grey background so the ribbon is visible */
+    border-bottom: 1px solid black; /* separates the ribbon from the page content below */
+    padding: 10px 0;           /* vertical padding above/below the nav items */
+  }
 
-.ribbon div {
-  cursor: pointer;
-}
+  /* Makes each nav item show a pointer/hand cursor on hover, hinting it's clickable */
+  .ribbon div {
+    cursor: pointer;
+  }
 </style>
+
 </head>
 <body>
 
+<!-- Top navigation ribbon - repeated identically on every page for consistent navigation -->
 <div class="ribbon">
   <div>Create new route</div>
   <div>View Logs</div>
@@ -31,6 +41,11 @@ body {
   <div>Toggle Light / Dark Mode</div>
   <div>Logout</div>
 </div>
+
+<!-- 
+  Dashboard body content goes here - this is where an overview 
+  (e.g. active/idle/stopped trip counts) would eventually live 
+-->
 
 </body>
 </html>

@@ -1,28 +1,37 @@
+<!-- 
+  Account.html
+  Shows an overview of the logged-in user's account details.
+  Uses the same ribbon nav as every other page.
+-->
 <!DOCTYPE html>
 <html>
 <head>
 <title>Al's logistical Account</title>
+
 <style>
-body {
-  margin: 0;
-}
+  body {
+    margin: 0;
+  }
 
-.ribbon {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  background-color: #ddd;
-  border-bottom: 1px solid black;
-  padding: 10px 0;
-}
+  /* Same ribbon styling as Dashboard.html - kept identical across pages */
+  .ribbon {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    background-color: #ddd;
+    border-bottom: 1px solid black;
+    padding: 10px 0;
+  }
 
-.ribbon div {
-  cursor: pointer;
-}
+  .ribbon div {
+    cursor: pointer;
+  }
 </style>
+
 </head>
 <body>
 
+<!-- Top navigation ribbon, same as all other pages -->
 <div class="ribbon">
   <div>Create new route</div>
   <div>View Logs</div>
@@ -32,8 +41,16 @@ body {
   <div>Logout</div>
 </div>
 
+<!-- Main page content -->
 <div style="padding: 20px;">
   <h2>Account Overview</h2>
+
+  <!-- 
+    This table uses "placeholder" text since there's no real user 
+    data or logic wired up yet - it's just the layout for now.
+    A table is appropriate here because this IS tabular data 
+    (labeled fields with matching values).
+  -->
   <table border="1">
     <tr>
       <td>Username</td>

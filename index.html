@@ -1,34 +1,50 @@
+<!-- 
+  index.html
+  This is the LOGIN page. Named "index" so GitHub Pages 
+  automatically loads this as the default/landing page.
+-->
 <!DOCTYPE html>
 <html>
 <head>
 <title>Al's logistical</title>
+
 <style>
-body {
-  height: 100vh;
-  margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+  /* Centers the login box both horizontally and vertically on the page */
+  body {
+    height: 100vh;       /* body takes the full height of the browser window */
+    margin: 0;            /* removes default browser spacing around the page */
+    display: flex;        /* turns body into a flex container so we can center its content */
+    justify-content: center; /* centers content horizontally */
+    align-items: center;     /* centers content vertically */
+  }
 </style>
+
 </head>
 <body>
 
-<div style="width: fit-content; height: fit-content; border: 1px solid black; padding: 3px;">
-<form>
-<table border="1">
-<tr>
-<td>Username</td>
-<td><input type="text" name="username"></td>
-</tr>
-<tr>
-<td>Password</td>
-<td><input type="password" name="password"></td>
-</tr>
-<tr>
-<td colspan="2"><a href="Dashboard.html"><button type="button">Login</button></a></td></tr>
-</table>
-</form>
+<!-- Box that wraps the login form, just for a visible border/padding -->
+<div style="width: fit-content; height: fit-content; border: 1px solid black; padding: 10px;">
+
+  <!-- The form itself. No action/logic yet - just the layout for now -->
+  <form>
+    <table border="1">
+      <tr>
+        <td>Username</td>
+        <!-- Plain text field for the username -->
+        <td><input type="text" name="username"></td>
+      </tr>
+      <tr>
+        <td>Password</td>
+        <!-- type="password" hides the characters as they're typed -->
+        <td><input type="password" name="password"></td>
+      </tr>
+      <tr>
+        <!-- colspan="2" makes this cell span both columns so the button is centered under both fields -->
+        <td colspan="2"><button type="submit">Login</button></td>
+      </tr>
+    </table>
+  </form>
+
 </div>
 
 </body>

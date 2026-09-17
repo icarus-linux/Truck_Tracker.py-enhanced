@@ -1,28 +1,37 @@
+<!-- 
+  Logs.html
+  Displays all logged trips in a table. Each row will 
+  eventually represent one trip entry from the truck tracker.
+-->
 <!DOCTYPE html>
 <html>
 <head>
 <title>Al's logistical Logs</title>
+
 <style>
-body {
-  margin: 0;
-}
+  body {
+    margin: 0;
+  }
 
-.ribbon {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  background-color: #ddd;
-  border-bottom: 1px solid black;
-  padding: 10px 0;
-}
+  /* Same ribbon styling as Dashboard.html - kept identical across pages */
+  .ribbon {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    background-color: #ddd;
+    border-bottom: 1px solid black;
+    padding: 10px 0;
+  }
 
-.ribbon div {
-  cursor: pointer;
-}
+  .ribbon div {
+    cursor: pointer;
+  }
 </style>
+
 </head>
 <body>
 
+<!-- Top navigation ribbon, same as all other pages -->
 <div class="ribbon">
   <div>Create new route</div>
   <div>View Logs</div>
@@ -32,9 +41,15 @@ body {
   <div>Logout</div>
 </div>
 
+<!-- Main page content -->
 <div style="padding: 20px;">
   <h2>Trip Logs</h2>
+
   <table border="1">
+    <!-- 
+      Header row - <th> is used instead of <td> because these are 
+      column titles, not data. Browsers style <th> bold/centered by default.
+    -->
     <tr>
       <th>Driver</th>
       <th>Truck ID</th>
@@ -45,6 +60,11 @@ body {
       <th>Finish Time</th>
       <th>Status</th>
     </tr>
+
+    <!-- 
+      Single placeholder row for now. Once real trip data exists, 
+      one row like this would be added per logged trip.
+    -->
     <tr>
       <td>placeholder</td>
       <td>placeholder</td>
