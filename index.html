@@ -26,7 +26,7 @@
 <div style="width: fit-content; height: fit-content; border: 1px solid black; padding: 10px;">
 
   <!-- The form itself. No action/logic yet - just the layout for now -->
-  <form>
+  <form id="loginForm">
     <table border="1">
       <tr>
         <td>Username</td>
@@ -46,6 +46,27 @@
   </form>
 
 </div>
+
+<script>
+  /*
+    TEMPORARY LOGIN PASS-THROUGH:
+
+    This temporarily allows the user to continue when the Login button
+    is clicked, without checking the username or password.
+
+    Change "home.html" below to the name of the page users should see
+    after clicking Login.
+
+    This is not real authentication and should only be used temporarily.
+    A proper server-side login check should replace this before production.
+  */
+  document.getElementById("loginForm").addEventListener("submit", function (event) {
+    event.preventDefault(); // Prevents the form from trying to submit to a backend
+
+    // Sends the user through to the next page temporarily
+    window.location.href = "Dashboard.html";
+  });
+</script>
 
 </body>
 </html>
