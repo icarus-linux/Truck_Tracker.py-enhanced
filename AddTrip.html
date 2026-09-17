@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Al's logistical Add Trip</title>
+<style>
+body {
+  margin: 0;
+}
+
+.ribbon {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  background-color: #ddd;
+  border-bottom: 1px solid black;
+  padding: 10px 0;
+}
+
+.ribbon div {
+  cursor: pointer;
+}
+</style>
+</head>
+<body>
+
+<div class="ribbon">
+  <div>Create new route</div>
+  <div>View Logs</div>
+  <div>View Account</div>
+  <div>View Tokens</div>
+  <div>Toggle Light / Dark Mode</div>
+  <div>Logout</div>
+</div>
+
+<div style="padding: 20px;">
+  <h2>Add New Trip</h2>
+  <form>
+    <table border="1">
+      <tr>
+        <td>Driver Name</td>
+        <td><input type="text" name="driver"></td>
+      </tr>
+      <tr>
+        <td>Truck ID</td>
+        <td><input type="text" name="truckId"></td>
+      </tr>
+      <tr>
+        <td>Route</td>
+        <td><input type="text" name="route"></td>
+      </tr>
+      <tr>
+        <td>Min Temp</td>
+        <td><input type="number" name="minTemp"></td>
+      </tr>
+      <tr>
+        <td>Max Temp</td>
+        <td><input type="number" name="maxTemp"></td>
+      </tr>
+      <tr>
+        <td>Start Time</td>
+        <td><input type="time" name="startTime"></td>
+      </tr>
+      <tr>
+        <td>Finish Time</td>
+        <td><input type="time" name="finishTime"></td>
+      </tr>
+      <tr>
+        <td colspan="2"><button type="button">Submit Trip</button></td>
+      </tr>
+    </table>
+  </form>
+</div>
+
+</body>
+</html>
