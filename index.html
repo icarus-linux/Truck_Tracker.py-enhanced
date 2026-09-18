@@ -9,13 +9,13 @@
 <title>Al's logistical</title>
 
 <style>
-  /* Centers the login box both horizontally and vertically on the page */
-  body {
-    height: 100vh;       /* body takes the full height of the browser window */
-    margin: 0;            /* removes default browser spacing around the page */
-    display: flex;        /* turns body into a flex container so we can center its content */
-    justify-content: center; /* centers content horizontally */
-    align-items: center;     /* centers content vertically */
+/* Centers the login box both horizontally and vertically on the page */
+body {
+height: 100vh;       /* body takes the full height of the browser window */
+margin: 0;            /* removes default browser spacing around the page */
+display: flex;        /* turns body into a flex container so we can center its content */
+justify-content: center; /* centers content horizontally */
+align-items: center;     /* centers content vertically */
   }
 </style>
 
@@ -25,29 +25,60 @@
 <!-- Box that wraps the login form, just for a visible border/padding -->
 <div style="width: fit-content; height: fit-content; border: 1px solid black; padding: 10px;">
 
-  <!-- The form itself. No action/logic yet - just the layout for now -->
-  <form id="loginForm">
-    <table border="1">
-      <tr>
-        <td>Username</td>
-        <!-- Plain text field for the username -->
-        <td><input type="text" name="username"></td>
-      </tr>
-      <tr>
-        <td>Password</td>
-        <!-- type="password" hides the characters as they're typed -->
-        <td><input type="password" name="password"></td>
-      </tr>
-      <tr>
-        <!-- colspan="2" makes this cell span both columns so the button is centered under both fields -->
-        <td colspan="2"><button type="submit">Login</button></td>
-      </tr>
-    </table>
-  </form>
+<!-- The form itself. No action/logic yet - just the layout for now -->
+<form id="loginForm">
+<table border="1">
+<tr>
+<td>Username</td>
+<!-- 
+  Plain text field for the username.
+  maxlength keeps it to a sane length as a basic safeguard.
+  The actual character filtering happens in the script below.
+-->
+<td><input type="text" name="username" id="username" maxlength="50" autocomplete="username"></td>
+</tr>
+<tr>
+<td>Password</td>
+<!-- type="password" hides the characters as they're typed -->
+<td><input type="password" name="password" id="password" maxlength="64" autocomplete="current-password"></td>
+</tr>
+<tr>
+<!-- colspan="2" makes this cell span both columns so the button is centered under both fields -->
+<td colspan="2"><button type="submit">Login</button></td>
+</tr>
+</table>
+</form>
 
 </div>
 
 <script>
+  /*
+    INPUT CHARACTER RESTRICTIONS
+
+    These two functions run every time the user types a character 
+    in the Username or Password field. Each one checks the field's 
+    current value against a regex, and strips out anything that 
+    doesn't match - so invalid characters (like emojis) never 
+    actually appear in the field, rather than just failing on submit.
+  */
+
+  // Username: only letters, numbers, and the characters valid in 
+  // usernames/emails ( . _ - @ ). This covers plain usernames and 
+  // email-style logins in one pattern.
+  const usernameField = document.getElementById("username");
+  usernameField.addEventListener("input", function () {
+    this.value = this.value.replace(/[^a-zA-Z0-9._@-]/g, "");
+  });
+
+  // Password: allows any standard keyboard character (letters, 
+  // numbers, common symbols like ! @ # $ % etc.) but blocks emojis 
+  // and other non-standard Unicode characters. The range \x20-\x7E 
+  // covers all standard printable ASCII characters (space through ~).
+  const passwordField = document.getElementById("password");
+  passwordField.addEventListener("input", function () {
+    this.value = this.value.replace(/[^\x20-\x7E]/g, "");
+  });
+
   /*
     TEMPORARY LOGIN PASS-THROUGH:
 
@@ -63,7 +94,7 @@
   document.getElementById("loginForm").addEventListener("submit", function (event) {
     event.preventDefault(); // Prevents the form from trying to submit to a backend
 
-    // Sends the user through to the next page temporarily
+// Sends the user through to the next page temporarily
     window.location.href = "Dashboard.html";
   });
 </script>
